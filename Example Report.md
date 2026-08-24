@@ -46,3 +46,15 @@ Not applicable: AC-T3-IO (no LLM-judge/overseer surface), AC-T3-SSM (no successo
 - **AC-T1-05** — hash-pin coverage lives in a pin manifest, not the agent file. Check for a definition-integrity manifest.
 - **AC-T1-09** — the in-bounds account/region set may be declared in `.claude/specs/<slug>/` or `rules/AWS-security-guidelines.md`, both loaded by the agent but not shown here. Check those before treating the allowlist as absent.
 - **AC-T2-06** — runtime AWS action auditing (CloudTrail) may exist independent of the config; confirm an append-only record the agent can't alter covers its deploy/destroy actions.
+
+---
+
+> **About this example.** The config audited here is `devops-agent.md` from
+> [`aws-samples/sample-claude-code-agent-team`](https://github.com/aws-samples/sample-claude-code-agent-team),
+> a public AWS sample demonstrating a spec-driven Claude Code agent team. It is reference/demo
+> code, not a hardened production template, and sample repositories reasonably favor clarity over
+> defense-in-depth. It is used here, unmodified, precisely because it is real, well-written, and
+> representative of how these configs are actually authored — a strong test of what a hardening
+> pass surfaces. The findings below are missing-mitigation observations against the auditor's rule
+> set, not defects in the sample's stated purpose. Source repo is licensed by its authors; see that
+> repository for its license and terms.
