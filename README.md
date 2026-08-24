@@ -2,9 +2,7 @@
 
 An ESRR-informed security linter for Claude Code subagents.
 
-This repository turns research on Emergent Strategic Reasoning Risks (ESRRs) into a practical
-security tool. As AI agents gain autonomy, they show strategic behaviors that resemble the
-tradecraft institutional counterintelligence (CI) was built to catch. The Agent Config Auditor
+AI counterintelligence assumes an agent may already be turned or disloyal: hijacked through what it reads, or misbehaving on its own. I built a research-backed, pre-deployment linter for agent configurations that maps CI doctrine to Emergent Strategic Reasoning Risks (ESRRs). It treats the agent as an untrusted insider and flags the configuration gaps that allow those behavioral risks to run, the kind supply-chain tools structurally can't see. The Agent Config Auditor
 borrows that CI framing to statically analyze and harden Claude Code subagent configurations
 against those risks.
 
