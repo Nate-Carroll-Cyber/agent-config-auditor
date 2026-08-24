@@ -70,6 +70,25 @@ network egress, a permission granted at deploy time, an agent's actual behavior 
 it with runtime controls (validation hooks, permission prompts, append-only audit logging) for
 defense in depth; the report flags where a gap can only be closed at runtime.
 
+### Portability
+
+The audit methodology is model-agnostic. The rule catalog
+(`references/hardening-rules.md`), the tier logic, and the report format are plain structured
+instructions — any sufficiently capable LLM can be given these files as context and produce the
+same audit. Nothing in the reasoning depends on a specific model.
+
+Two things are Claude-Code-specific. First, packaging: the `SKILL.md` frontmatter and
+auto-invocation (firing on "check my agents") use Claude Code's Agent Skills format, so on another
+platform you drive the audit by supplying the files directly or wiring them into that platform's
+tooling rather than relying on automatic discovery. Second, the target: the configs it audits are
+Claude Code subagent `.md` files, and some rules reference Claude-specific fields (`tools:`,
+`permissionMode`, the hook model). Auditing a different agent framework's config would mean
+remapping those field-level checks; the tier structure and behavioral (ESRR) rules carry over
+unchanged.
+
+In short: the rules and report are reusable anywhere; the skill packaging and the audited config
+schema assume Claude Code.
+
 ## 4. Hardened template
 
 `_TEMPLATE.md` is a starting skeleton that pre-satisfies the catalog, so a new agent begins
