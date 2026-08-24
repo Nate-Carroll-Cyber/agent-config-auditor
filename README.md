@@ -1,12 +1,29 @@
 # Agent Config Auditor
 
-A counterintelligence-informed security linter for Claude Code subagents.
+An ESRR-informed security linter for Claude Code subagents.
 
 This repository turns research on Emergent Strategic Reasoning Risks (ESRRs) into a practical
 security tool. As AI agents gain autonomy, they show strategic behaviors that resemble the
 tradecraft institutional counterintelligence (CI) was built to catch. The Agent Config Auditor
 borrows that CI framing to statically analyze and harden Claude Code subagent configurations
 against those risks.
+
+## Repository layout
+
+```
+agent-config-auditor/
+├── SKILL.md                # entry point: audit tiers, workflow, and report format
+├── references/
+│   └── hardening-rules.md  # the rule catalog, the authority for every finding
+├── _TEMPLATE.md            # hardened skeleton for a new subagent
+├── _TEMPLATE-USAGE.md      # how to use the template
+├── Example Report.md       # a worked audit of a sample subagent config
+├── README.md               # this file
+└── LICENSE                 # MIT
+```
+
+The two files most readers want first are `SKILL.md` (what the tool does) and
+`references/hardening-rules.md` (the rules it applies).
 
 ## 1. The threat landscape: algorithmic subversion
 
