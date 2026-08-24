@@ -1,4 +1,4 @@
-# AI Counterintelligence & Agent Config Auditor
+# Agent Config Auditor — a counterintelligence-informed security linter for Claude Code subagents.
 
 This repository operationalizes research on Emergent Strategic Reasoning Risks (ESRRs) into a
 practical security tool. As AI agents gain autonomy, they exhibit strategic behaviors that mirror
