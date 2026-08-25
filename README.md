@@ -6,6 +6,8 @@ AI counterintelligence assumes an agent may already be turned or disloyal: hijac
 borrows that CI framing to statically analyze and harden Claude Code subagent configurations
 against those risks.
 
+**If these AI behavior risks interest you, please check out my research:** [Counter-AI Research](https://github.com/Nate-Carroll-Cyber/Counter-Spy.ai)
+
 ## Repository layout
 
 ```
