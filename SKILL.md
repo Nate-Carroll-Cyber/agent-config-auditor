@@ -1,6 +1,6 @@
 ---
 name: agent-config-auditor
-description: Audits Claude Code subagent configuration files (the .md agent definitions with frontmatter) for security-hardening gaps — over-broad tool grants, missing action gates, prompt-injection exposure, cross-agent knowledge that enables impersonation/false-flag, weak identity/provenance, unbounded action scope, and missing mitigations for emergent-reasoning (ESRR) risks like reward hacking, deception, sandbagging, control subversion, overseer persuasion, and successor manipulation. Use this skill whenever the user wants to review, harden, assess, or security-audit an agent config, a subagents directory, a `.claude/agents/` folder, or an agent hierarchy — even if they just say "check my agents" or "is this agent set up safely." Applies universal agent-hardening rules to any subagent, plus multi-agent/counterintelligence rules for fleets and behavioral-mitigation (ESRR) rules for LLM decision-makers — all applied automatically by relevance, nothing withheld behind a mode or an opt-in.
+description: Audits Claude Code subagent configuration files (the .md agent definitions with frontmatter) for security-hardening gaps — over-broad tool grants, missing action gates, prompt-injection exposure, agents able to edit their own controls, cross-agent knowledge that enables impersonation/false-flag, shared writable surfaces, weak identity/provenance, unbounded scope, and missing mitigations for all eight emergent-reasoning (ESRR) risk categories, from reward hacking and deception through successor manipulation and inter-agent misalignment. Use this skill whenever the user wants to review, harden, assess, or security-audit an agent config, a subagents directory, a `.claude/agents/` folder, or an agent hierarchy — even if they just say "check my agents" or "is this agent set up safely." Applies universal, multi-agent/counterintelligence, and ESRR behavioral-mitigation rules automatically by relevance, nothing withheld behind a mode or an opt-in.
 ---
 
 # Agent Config Auditor
@@ -31,9 +31,10 @@ surfaces a single agent doesn't have.
 
 Add **Tier 3 (ESRR behavioral-mitigation)** when the agent is an *LLM-driven decision-maker* — it
 reasons, evaluates, oversees, self-reports, or acts on its own conclusions. Tier 3 checks whether
-the config carries the controls that make emergent-reasoning risks (reward hacking, deception,
-sandbagging, control subversion, overseer persuasion, successor manipulation) detectable or
-constrained.
+the config carries the controls that make emergent-reasoning risks detectable or constrained,
+across all eight ESRR categories (reward hacking, deception, evaluation gaming, control measure
+subversion, research sabotage, influence operations, successor manipulation, inter-agent
+misalignment).
 
 **Tiers apply by relevance, automatically — never by asking the user and never withheld behind a
 mode.** Decide from the config text:
@@ -57,6 +58,16 @@ Both are config-visible and both are phrased as missing mitigation — "the conf
 unconditional constraint; restraint rests on an unverifiable premise" — never as a behavioral
 prediction. Citing present prompt text is in scope when the finding is that a safety property
 wrongly depends on it, not that the text proves misbehavior.
+
+**What a clean Tier 3 result does not mean.** A static audit can catch a misspecified objective
+where it appears in config text (AC-T3-RH2). It cannot see goal misgeneralization, which occurs with
+a correct specification and leaves no trace in the file. Never present a Tier 3 PASS as a behavioral
+clearance; say so in the verdict when the user appears to read it that way.
+
+**Rules that cross tiers.** AC-T1-10 (agent can edit its own controls) derives from RISK-CMS-04 but
+sits in Tier 1, because an injected tool-runner can do it as readily as a decision-maker. AC-T3-IAM
+(shared writable surface) is a fleet-level rule; assess it across the set, including every
+monitor-and-monitored pairing, and report it in the cross-agent section.
 
 The full rule catalog — id, check, rationale, remediation, and severity, across all three tiers —
 is in `references/hardening-rules.md`. Read it before auditing; it is the authority for every
@@ -105,9 +116,9 @@ ALWAYS use this template:
 - [optionally record a notable PASS or discriminating negative — a rule that correctly did NOT
   fire]
 
-## Cross-agent findings (Tier 2 only)
+## Cross-agent findings (Tier 2, plus AC-T3-IAM)
 - [findings about the fleet, not one agent — e.g., two agents with operational knowledge of
-  each other]
+  each other, or a monitor that reads a path the monitored agent can write]
 
 ## Cannot determine from config
 - [RULE-ID] on [agent]: [what the config doesn't state, and where that property would live]
@@ -125,8 +136,12 @@ to change, not just the principle.
 - Frontmatter `tools:` is a real capability boundary — its presence/absence is assessable from the
   config. Runtime `permissionMode`, hooks wired at the project level, and approval steps may live
   outside the file; if so, flag as cannot-determine and name where to check.
-- For Tier 2, cross-agent findings are about the *set*, not one file — report them in their own
-  section so they aren't misattributed to a single agent.
+- For Tier 2 and AC-T3-IAM, cross-agent findings are about the *set*, not one file — report them in
+  their own section so they aren't misattributed to a single agent. For AC-T3-IAM, list what each
+  agent can write and what each reads before deciding; the finding is the overlap.
+- Path-level write restrictions (AC-T1-10) and out-of-band stop controls (AC-T3-SSM2) usually live
+  outside the agent file. Silence in the config is CANNOT-DETERMINE with a pointer, not a FAIL. A
+  stop story that consists only of prompt text is a FAIL.
 
 ## Notes
 

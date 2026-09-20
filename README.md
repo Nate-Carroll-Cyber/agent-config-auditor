@@ -63,11 +63,14 @@ The tool applies a three-tier rule system automatically, by relevance to each ag
 manual opt-in. A rule outside an agent's scope is marked `NOT-APPLICABLE`, not silently dropped.
 
 - **Tier 1 (Universal).** Baseline capability, injection, scope, and identity hygiene, applied to
-  every subagent.
+  every subagent, including whether an agent can edit the files that constrain it.
 - **Tier 2 (Multi-Agent / CI).** Cross-agent attack surface for coordinating fleets: impersonation,
   false-flag exposure, unbrokered action-triggering, and monoculture.
-- **Tier 3 (ESRR mitigation).** LLM decision-makers only. Static controls against reward hacking,
-  deception, evaluation gaming, control subversion, overseer persuasion, and successor manipulation.
+- **Tier 3 (ESRR mitigation).** LLM decision-makers only. Static controls across all eight ESRR
+  categories: reward hacking, deception, evaluation gaming, control subversion, research sabotage,
+  influence on overseers and on human principals, successor manipulation, and inter-agent
+  misalignment. A clean Tier 3 result is not a behavioral clearance. Goal misgeneralization is not
+  visible in config text, and the tool says so.
 
 The full rule catalog (id, check, rationale, remediation, severity) is the authority for every
 finding: [`references/hardening-rules.md`](references/hardening-rules.md).

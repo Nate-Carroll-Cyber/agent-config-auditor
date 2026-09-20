@@ -27,8 +27,20 @@ pre-writes the fixes so they don't recur.
 - Star-topology reporting + prohibitive-only sibling naming — AC-T2-01 / AC-T2-02
 - Advisory-not-a-trigger output framing — AC-T3-RH
 - Prohibitions that hold unconditionally, not contingent on a sim/test belief — AC-T3-EG2
-- By-type control blocks for effects/assertion/judge/disruption/successor agents —
-  AC-T1-03, AC-T2-05, AC-T2-06, AC-T3-DC, AC-T3-IO, AC-T3-SSM
+- Extended untrusted-artifact list (issue bodies, code comments, package metadata, caches) — AC-T1-02
+- Declared memory purpose and entry shape — AC-T1-07
+- Self-edit prohibition plus the frontmatter note on where the hard control lives — AC-T1-10
+- Task-anchored objective with a permitted way to fail — AC-T3-RH2
+- No grader or monitor mechanics in the prompt — AC-T3-RH3
+- By-type control blocks for effects/assertion/judge/disruption/successor/result-producing/
+  orchestrator/outward-facing/human-facing/fleet agents, plus the stop-control note —
+  AC-T1-03, AC-T2-05, AC-T2-06, AC-T3-DC, AC-T3-DC2, AC-T3-IO, AC-T3-IO2, AC-T3-SRS, AC-T3-SSM,
+  AC-T3-SSM2, AC-T3-IAM
+
+Three of these cannot be satisfied from inside the agent file. AC-T1-10 path denials, the
+AC-T3-SSM2 stop control, and AC-T3-IAM path isolation live in project settings, hooks, and the
+orchestrator. The template carries the reminders; the audit will return CANNOT-DETERMINE for them
+until you point it at where those controls are defined.
 ## Closing the loop
 After filling the template, run the agent-config-auditor skill against the new file. A
 template-derived agent should come back with no High/Medium findings except any you introduced —
